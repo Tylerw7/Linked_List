@@ -83,6 +83,26 @@ class DoublyLinkedList {
         }
         return array;
     }
+
+    reverse() {
+        if (!this.head.next) {
+            return this.head;
+        }
+        let currentNode = this.head;
+        this.tail = this.head;
+        while (currentNode) {
+            // Swap next and prev for each node
+            const temp = currentNode.next;
+            currentNode.next = currentNode.prev;
+            currentNode.prev = temp;
+            // Move to the next node (which is now the previous one)
+            if (!temp) {
+                this.head = currentNode;
+            }
+            currentNode = temp;
+        }
+        return this;
+    }
 }
 
 const mylist = new DoublyLinkedList(10)
@@ -90,6 +110,7 @@ mylist.append(5)
 mylist.append(16)
 mylist.prepend(1)
 mylist.insert(2, 99)
+
 console.log(mylist.printList())
 
 
